@@ -1,0 +1,5 @@
+const Mycode = (function(){
+    
+})
+
+Mycode();

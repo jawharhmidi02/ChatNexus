@@ -1,0 +1,1295 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.showmoreinfo{
+    display: flex !important;
+}
+
+.pagecontainer{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+
+.userscontainer{
+    height: 100vh;
+    width: 100%;
+    min-width: 350px ;
+    border-right: 0.5px solid rgba(182, 174, 174, 0.751);
+    display: flex;
+    flex-direction: column;
+}
+
+.userscontainer .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 20px;
+}
+
+.userscontainer .title .icons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.userscontainer .title .profile{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(54, 54, 54);
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+}
+
+.userscontainer .title .profile:hover{
+    background-color: rgba(220, 216, 216, 0.56);
+}
+
+.userscontainer .title .creategroup{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(54, 54, 54);
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+}
+
+.userscontainer .title .creategroup:hover{
+    background-color: rgba(220, 216, 216, 0.56);
+}
+
+.userscontainer .title span{
+    font-size: 32px;
+}
+.userscontainer .searchcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.userscontainer .searchcontainer .goback{
+    color: #666769;
+    margin-right: 5px;
+    cursor: pointer;
+    display: none;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.userscontainer .searchcontainer .goback:hover{
+    background-color: #c0c0c071;
+}
+
+.userscontainer .searchcontainer .goback span{
+    font-size: 26px;
+}
+
+.userscontainer .searchcontainer .searchinput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f5;
+    height: 35px;
+    color: #c2c2c4;
+    border-radius: 50px;
+    width: 100%;
+    cursor: default;
+}
+
+
+.userscontainer .searchcontainer .searchinput input{
+    border: 0;
+    height: 100%;
+    background-color: #f3f3f5;
+    width: 85%;
+    font-size: 16px;
+}
+
+.userscontainer .searchcontainer .searchinput input:focus{
+    outline-style: none;
+    box-shadow: none;
+}
+
+.userscontainer .searchcontainer .searchinput input::placeholder{
+    color: #87898a;
+    font-size: 16px;
+}
+
+.userscontainer .searchresultcontainer .sorters{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    color: #a5a6a6;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.userscontainer .searchresultcontainer .sorters .text{
+    font-size: 22px;
+}
+
+.userscontainer .searchresultcontainer .sorters hr{
+    color: #cdcdd098;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.userscontainer .chatscontainer{
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+.userscontainer .chatscontainer .userinfocontainer{
+    height: 75px;
+    min-height: 75px;
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-top: 6px;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.userscontainer .chatscontainer .userinfocontainer:hover{
+    background-color: #f0f0f0;
+}
+
+.userscontainer .chatscontainer .userinfocontainer .photo{
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 10px;
+
+}
+.userscontainer .chatscontainer .userinfocontainer .photo img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover; 
+    border-radius: 50%;
+}
+
+.userscontainer .chatscontainer .userinfocontainer .userdetails{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    margin-left: 15px;
+}
+.userscontainer .chatscontainer .userinfocontainer .userdetails .name{
+    font-size: 22px;
+    margin-top: 15px;
+    overflow: hidden !important; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.userscontainer .chatscontainer .userinfocontainer .userdetails .lastmessage{
+    font-size: 15px;
+    color: #87898a;
+    margin-top: 7px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.userscontainer .chatscontainer .userinfocontainer .userdetails .lastmessage .msg{
+    overflow: hidden !important; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.userscontainer .chatscontainer .userinfocontainer .userdetails .lastmessage .time{
+    width: 70%;
+}
+
+.userscontainer .chatscontainer .userinfocontainer .userdetails .notread{
+    color: black;
+    font-weight: bold;
+    margin-top: 4px;
+
+}
+
+.firstpagecontainer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.firstpagecontainer .firstpage{
+    margin: auto;
+}
+
+.firstpagecontainer .firstpage .title h1{
+    display: flex;
+    flex-direction: row;
+    font-size: 36px;
+    justify-content: center;
+    align-self: center;
+}
+
+.firstpagecontainer .firstpage .details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #929294;
+    margin-top: 10px;
+}
+
+.firstpagecontainer .firstpage .details div{
+    display: flex;
+    flex-direction: row;
+}
+
+.firstpagecontainer .firstpage .details .account{
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.firstpagecontainer .firstpage .details .account:hover{
+    color: #535252;
+}
+
+.firstpagecontainer .copyright{
+    margin-bottom: 20px;
+    color: #929294;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatcontainer{
+    display: none;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+.chatcontainer .conversation{
+    height: 100vh;
+    max-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chatcontainer .conversation .topsection{
+    height: 90px;
+    width: 100%;
+    border-bottom: rgba(0, 0, 0, 0.06) solid 0.1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chatcontainer .conversation .topsection .leftside{
+    height: 75px;
+    min-height: 75px;
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 8px;
+    margin-top: 6px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatcontainer .conversation .topsection .leftside .goback span{
+    font-size: 50px;
+    transition: all 0.3s;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.chatcontainer .conversation .topsection .leftside .goback span:hover{
+    background-color: #d3d3d78a;
+}
+
+
+.chatcontainer .conversation .topsection .photo{
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 10px;
+
+}
+.chatcontainer .conversation .topsection .photo img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover; 
+    border-radius: 50%;
+}
+
+.chatcontainer .conversation .topsection .userdetails{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    margin-left: 15px;
+}
+.chatcontainer .conversation .topsection .userdetails .name{
+    font-size: 22px;
+    overflow: hidden ; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatcontainer .conversation .topsection .userdetails .lastmessage{
+    font-size: 15px;
+    color: #87898a;
+    margin-top: 7px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.chatcontainer .conversation .topsection .userdetails .lastmessage .msg{
+    overflow: hidden !important; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatcontainer .conversation .topsection .userdetails .lastmessage .time{
+    width: 70%;
+}
+
+.chatcontainer .conversation .topsection .rightside{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatcontainer .conversation .topsection .rightside span{
+    font-size: 50px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: all 0.3s;
+    border-radius: 50%;
+}
+.chatcontainer .conversation .topsection .rightside span:not(.search):hover{
+    background-color: #d3d3d78a;
+}
+
+.chatcontainer .conversation .topsection .rightside .search{
+    font-size: 40px;
+    margin-right: 0;
+}
+.chatcontainer .conversation .topsection .rightside .search:hover{
+    background-color: '';
+}
+
+.chatcontainer .conversation .topsection .rightside .searchdiv{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    border-radius: 50%;
+}
+
+.chatcontainer .conversation .topsection .rightside .searchdiv:hover{
+    background-color: #d3d3d78a;
+}
+
+
+.chatcontainer .conversation .middlesection{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+
+
+.chatcontainer .conversation .middlesection .convcontainer{
+    margin-top: auto;
+}
+
+.chatcontainer .conversation .middlesection .messagecontainer{
+    min-height: 60px;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.chatcontainer .conversation .middlesection .notyou{
+    margin-left: 20px;
+    margin-right: auto;
+    background-color: black;
+    color: white;
+    border: 1px black solid;
+
+}
+
+.chatcontainer .conversation .middlesection .You{
+    margin-left: auto;
+    margin-right: 20px;
+    background-color: white;
+    border: 1px black solid;
+}
+
+.chatcontainer .conversation .middlesection .message{
+    min-width: 150px;
+    min-height: 50px;
+    max-width: 20vw;
+    height: fit-content;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: auto;
+    font-size: 14px;
+    padding: 4px;
+}
+
+.chatcontainer .conversation .middlesection .message .sender{
+    color: #87898a;
+    margin-left: 3px;
+}
+
+.chatcontainer .conversation .middlesection .message .context{
+    margin-left: 5px;
+    height: auto;
+    word-wrap:break-word;
+}
+
+.chatcontainer .conversation .middlesection .message .time{
+    margin-left: auto;
+    margin-right: 5px;
+    color: #87898a;
+    font-size: 11px;
+}
+
+.chatcontainer .conversation .bottomsection{
+    min-height: 60px;
+    max-height: 180px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.chatcontainer .conversation .bottomsection .plus span{
+    font-size: 34px;
+}
+.chatcontainer .conversation .bottomsection .plus{
+    margin-left: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 50%;
+
+}
+
+.chatcontainer .conversation .bottomsection .plus:hover{
+    background-color: #d3d3d78a;
+
+}
+
+.chatcontainer .conversation .bottomsection .input{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    color: #c2c2c4;
+    background-color: #f3f3f5;
+    border-radius: 30px;
+    height: fit-content;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.chatcontainer .conversation .bottomsection .input span{
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 30px;
+    cursor: default;
+
+}
+
+.chatcontainer .conversation .bottomsection .input .emoji{
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 50%;
+}
+
+.chatcontainer .conversation .bottomsection .input .emoji:hover{
+    background-color: #d3d3d78a;
+}
+
+.chatcontainer .conversation .bottomsection .input .message{
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    font-size: 20px;
+    resize: none;
+    height: 20px;
+    outline: none;
+    transition: none;
+    height: 26px;
+    max-height: 140px;
+}
+
+.chatcontainer .conversation .bottomsection .input .message:focus{
+    outline-style: none;
+    box-shadow: none;
+}
+
+.chatcontainer .conversation .bottomsection .like{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-right: 30px;
+    transition: all 0.3s;
+}
+
+.chatcontainer .conversation .bottomsection .like .send{
+    font-size: 44px;
+}
+
+.chatcontainer .conversation .bottomsection .like span{
+    font-size: 34px;
+    transition: all 0.3s;
+    border-radius: 50%;
+    cursor: pointer;
+
+}
+
+.chatcontainer .conversation .bottomsection .like span:hover{
+    background-color: #d3d3d78a;
+
+}
+
+.chatcontainer .moreinfo{
+    flex-direction: column;
+    min-width: 20vw;
+    max-width: 30vw;
+    width: 100%;
+    border-left: #b2b2b366 solid 0.5px;
+    display: none;
+    overflow: auto;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+.chatcontainer .moreinfo .goback{
+    margin-top: 5px;
+    display: none;
+}
+
+
+.chatcontainer .moreinfo .goback div{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.chatcontainer .moreinfo .goback div:hover{
+    background-color: #c0c0c071;
+}
+
+.chatcontainer .moreinfo .goback div span{
+    font-size: 50px;
+}
+
+.chatcontainer .moreinfo .topsection{
+    margin-top: 4vh;
+}
+
+.chatcontainer .moreinfo .topsection .photo img{
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.chatcontainer .moreinfo .topsection .photo{
+    display: flex;
+    justify-content: center;
+}
+
+.chatcontainer .moreinfo .topsection .name{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+}
+
+.chatcontainer .moreinfo .topsection .activetime{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    color:#929294;
+    font-size: 14px;
+}
+
+.chatcontainer .moreinfo .middlesection{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    margin-top: 20px;
+    gap: 4px;
+}
+
+.chatcontainer .moreinfo .middlesection .deletespan{
+    display: flex;
+    justify-content: center;
+}
+
+.chatcontainer .moreinfo .middlesection .deletespan div{
+    background-color: #c2c2c44d;
+    border-radius: 50%;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    cursor: pointer;
+}
+
+.chatcontainer .moreinfo .middlesection .deletespan div:hover{
+    background-color: #b2b2b3;
+}
+
+.chatcontainer .moreinfo .middlesection .deletespan span{
+    font-size: 35px;
+}
+
+.chatcontainer .moreinfo .middlesection .text{
+    text-align: center;
+    color: #535252;
+    font-size: 15px;
+}
+
+.chatcontainer .moreinfo .bottomsection{
+    display: flex;
+    padding: 20px;
+    margin-top: 15px;
+    flex-direction: column;
+}
+
+.chatcontainer .moreinfo .bottomsection .stylechat{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    border-radius: 15px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    padding-left: 10px;
+    /* margin-bottom: 5px; */
+}
+
+.chatcontainer .moreinfo .bottomsection .stylechat:hover{
+    background-color: #c0c0c071;
+}
+
+.chatcontainer .moreinfo .bottomsection .stylechat span{
+    font-size: 32px;
+}
+
+.chatcontainer .moreinfo .bottomsection .members{
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member{
+    /* width: 100%; */
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member .leftside{
+    display: flex;
+    flex-direction: row;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member .leftside .photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member .leftside .photo img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.chatcontainer .moreinfo .bottomsection .members .member .leftside .details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 14px;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member .leftside .details .nickname{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member .rightside{
+    margin-right: 6px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member .rightside:hover{
+    background-color: #cacaca73;
+}
+
+.chatcontainer .moreinfo .bottomsection .members .member .rightside span{
+    font-weight: lighter;
+    color: #717172;
+}
+
+/* Responsive */
+
+
+@media screen and ( max-width: 1400px ){
+    .pagecontainer{
+        display: flex;
+        flex-direction: row;
+    }
+    .userscontainer{
+        width: 350px;
+    }
+}
+
+@media screen and ( max-width: 1300px ){
+    .chatcontainer .moreinfo .goback{
+        display: flex;
+    }
+    .chatcontainer .moreinfo{
+        max-width: 100%;
+    }
+
+    /* .chatcontainer .conversation{
+        display: none;
+    } */
+}
+
+@media screen and ( max-width: 1100px ){
+    .firstpagecontainer .firstpage .title h1{
+        font-size: 28px;
+    }
+    .firstpagecontainer .firstpage .details{
+        font-size: 12px;
+    }
+    .firstpagecontainer .copyright{
+        font-size: 12px;
+    }
+
+
+}
+
+@media screen and ( max-width: 800px ){
+    .firstpagecontainer{
+        display: none;
+    }
+    .chatcontainer{
+        display: none;
+    }
+    .userscontainer{
+        width: 100vw;
+        min-width: 0;
+    }
+    .chatcontainer .conversation .topsection .userdetails .name{
+        font-size: 18px;
+    }
+    .chatcontainer .conversation .topsection .userdetails .lastmessage{
+        font-size: 12px;
+    }
+    .chatcontainer .conversation .topsection .rightside span{
+        font-size: 40px;
+        margin-right: 2px;
+    }
+    .chatcontainer .conversation .topsection .rightside .search{
+        font-size: 30px;
+    }
+    .chatcontainer .conversation .topsection .rightside .searchdiv{
+        width: 40px;
+        height: 40px;
+    }
+    .chatcontainer .conversation .bottomsection .input{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+    .chatcontainer .conversation .bottomsection .plus{
+        margin-left: 10px;
+    }
+    .chatcontainer .conversation .bottomsection .like{
+        margin-right: 10px;
+    }
+    .chatcontainer .conversation .topsection .leftside .goback span{
+        font-size: 40px;
+    }
+    .chatcontainer .conversation .bottomsection .like{
+        gap: 5px;
+    }
+    .chatcontainer .conversation .bottomsection .input span{
+        margin-left: 3px;
+        margin-right: 3px;
+    }
+    .chatcontainer .conversation .topsection .photo img{
+        width: 40px;
+        height: 40px;
+    }
+    .chatcontainer .conversation .topsection .photo{
+        width: 40px;
+        margin-left: 0;
+    }
+    .chatcontainer .conversation .topsection .userdetails{
+        margin-left: 0;
+    }
+}
+
+
+
+/* create group popup */
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    padding-top: 10px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    animation: fadeIn 0.4s ease-in;
+    transition: all 0.4s;
+    min-height: 300px;
+    height: fit-content;
+    max-height: 86%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    display: flex;
+    justify-content:end;
+
+
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.popup-content .content{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.popup-content .content .details{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.popup-content .content .details input{
+    height: 24px;
+    width: 200px;
+    border-radius: 5px;
+    border: 0.5px solid #6f6f74;
+    background-color: #f3f3f5;
+    padding-left: 5px;
+    color: #575757;
+    font-size: 18px;
+}
+
+.empty{
+    border-color: red !important;
+    box-shadow: 0 0 5px red !important;
+}
+
+.popup-content .content .details input:focus{
+    outline-style: none;
+    box-shadow: none;
+}
+
+.popup-content .content .members{
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.popup-content .content .members .searchcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-top: 10px;
+}
+
+.popup-content .content .members .searchcontainer .searchinput{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #f3f3f5;
+    height: 35px;
+    color: #c2c2c4;
+    border-radius: 50px;
+    width: 100%;
+    cursor: default;
+}
+
+.popup-content .content .members .searchcontainer .searchinput input{
+    border: 0;
+    height: 100%;
+    background-color: #f3f3f5;
+    width: 85%;
+    font-size: 16px;
+}
+
+.popup-content .content .members .searchcontainer .searchinput input:focus{
+    outline-style: none;
+    box-shadow: none;
+}
+
+.popup-content .content .members .searchcontainer .searchinput input::placeholder{
+    color: #87898a;
+    font-size: 16px;
+}
+
+
+.popup-content .content .members .chatscontainer{
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    scroll-behavior: smooth;
+    max-height: 40vh;
+    margin-bottom: 30px;
+}
+
+
+.popup-content .content .members .chatscontainer .userinfocontainer{
+    height: 75px;
+    min-height: 75px;
+    width: 96%;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer:hover{
+    background-color: #f0f0f0;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .photo{
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-left: 10px;
+
+}
+.popup-content .content .members .chatscontainer .userinfocontainer .photo img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover; 
+    border-radius: 50%;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .userdetails{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    margin-left: 15px;
+}
+.popup-content .content .members .chatscontainer .userinfocontainer .userdetails .name{
+    font-size: 22px;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow: hidden !important; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .userdetails .lastmessage{
+    font-size: 15px;
+    color: #87898a;
+    margin-top: 7px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .userdetails .lastmessage .msg{
+    overflow: hidden !important; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .userdetails .lastmessage .time{
+    width: 70%;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .userdetails .notread{
+    color: black;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .checkbox{
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: black;
+}
+
+.popup-content .content .members .chatscontainer .userinfocontainer .checkbox input{
+    width: 50px;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    right: 20px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+  
+.popup-content .content .members .chatscontainer .userinfocontainer:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+  
+.popup-content .content .members .chatscontainer .userinfocontainer input:checked ~ .checkmark {
+    background-color: black;
+}
+  
+.checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.popup-content .content .members .chatscontainer .userinfocontainer input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+.popup-content .content .members .chatscontainer .userinfocontainer .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.popup-content .create{
+    display: flex;
+    margin-top: auto;
+}
+
+.popup-content .create input{
+    margin-left: auto;
+    margin-right: 15px;
+    height: 36px;
+    border: 0;
+    color: white;
+    border-radius: 10px;
+    width: 100px;
+    font-size: 18px;
+    transition: 0.3s ease;
+    cursor: not-allowed;
+    background-color: #575757;
+    margin-bottom: 20px;
+}
+
+.notdisabled{
+    cursor: pointer !important;
+    background-color: black !important;
+}
+
+.popup-content .create input:hover{
+    background-color: #575757 !important;
+}
+
+
+/* Leave group popup */
+
+.leavegrouppopup .popup-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    padding-top: 10px;
+    border: 1px solid #888;
+    width: 30%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    animation: fadeIn 0.4s ease-in;
+    transition: all 0.4s;
+    min-height: 100px;
+    height: fit-content;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.leavegrouppopup .popup-content .create input{
+    margin-left: auto;
+    margin-right: 15px;
+    height: 36px;
+    border: 0;
+    color: white;
+    border-radius: 10px;
+    width: 80px;
+    font-size: 18px;
+    transition: 0.3s ease;
+    cursor: not-allowed;
+    background-color: #575757;
+}
+
+.leavegrouppopup .popup-content .create .cancelbutton{
+    background-color: white !important;
+    color: black;
+    border: black 1px solid;
+}
+
+.leavegrouppopup .popup-content .create input:hover{
+    background-color: #575757 !important;
+}
+
+.leavegrouppopup .popup-content .create .cancelbutton:hover{
+    background-color: #b4b3b3 !important;
+    color: rgb(57, 57, 57);
+}
+
+/* addmember */
+
+.addmemberstyle{
+    cursor: pointer;
+    transition: all 0.4s;
+    border-radius: 15px;
+}
+
+.addmemberstyle:hover{
+    background-color: #acacad6c;
+}

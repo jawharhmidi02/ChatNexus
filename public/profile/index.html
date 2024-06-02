@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <script src="../axios.js"></script>
+    <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <h1>Upload Profile Picture</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="profilePicture" required>
+      <button type="submit">Upload</button>
+      <img src=".." alt="" srcset="">
+    </form>
+    <div id="message"></div>
+  
+    
+</body>
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatNexus: Chat</title>
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+    <script src="../axios.js"></script>
+    <script defer src="style.js"></script>
+    <script defer src="conv.js"></script>
+</head>
+<body>
+    <div class="pagecontainer">
+        
+        <div class="userscontainer">
+
+            <div class="title">
+                <div class="text">
+                    <h1>Chats</h1>
+                </div>
+
+                <div class="icons">
+                    
+                    <div class="profile">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    
+                    <div class="creategroup">
+                        <span class="material-symbols-outlined">add_box</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="searchcontainer">
+                
+                <div class="goback">
+                    <span class="material-symbols-outlined">
+                        arrow_back
+                    </span>
+                </div>
+
+                <div class="searchinput">
+                    
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+
+                    <input type="text" placeholder="Search Chat ">
+            
+                </div>
+            
+            </div>
+            
+            <hr style="color: rgba(182, 174, 174, 0.318); margin-top: 20px;">
+
+            <div class="chatscontainer">
+
+                
+                
+            </div>
+
+            <div class="chatscontainer searchresultcontainer" style="display: none;">
+
+            </div>
+
+        </div>
+
+
+        <div class="firstpagecontainer">
+            <div class="firstpage">
+
+                <div class="title">
+                    <h1>
+                        Welcome&nbsp;<div class="first_name">Firstname</div>
+                    </h1>
+                </div>
+                <div class="details">
+                    <div>
+                        Send and recieve messages to your friends even they are offline or you are! 
+                    </div>
+                    <div>
+                        You can edit your&nbsp;<div class="account">Account </div>&nbsp;on the icon top left corner 
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                ChatNexus™ - Copyright © 2024. All Rights Reserved.
+            </div>
+        </div>
+
+        <div class="chatcontainer">
+            <div class="conversation">
+
+                <div class="topsection">
+                    <div class="leftside">
+                        <div class="goback">
+                            <span class="material-symbols-outlined">
+                                arrow_back
+                            </span>
+                        </div>
+                        <div class="photo">
+                            <img src="../photo/13.png" alt="">
+                        </div>
+    
+                        <div class="userdetails">
+                            <div class="name">
+                                Jawhar Hmidi
+                            </div>
+                            <div class="lastmessage">
+                                <div class="msg">Active:</div> 
+                                <div class="time">&nbsp;1 hour ago</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="rightside">
+                        <div class="searchdiv">
+                            <span class="material-symbols-outlined search">
+                                search
+                            </span>
+                        </div>
+                        
+                        <span class="material-symbols-outlined openmoreinfo">
+                            keyboard_double_arrow_left
+                        </span>
+                    </div>
+                </div>
+
+                <div class="middlesection">
+
+                    <div class="convcontainer">
+
+                        <div class="messagecontainer">
+                            <div class="message notyou">
+                                <div class="sender">
+                                    - Raed
+                                </div>
+                                <div class="context">
+                                    Hello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message You">
+                                <div class="sender">
+                                    -You
+                                </div>
+                                <div class="context">
+                                    Hello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message You">
+                                <div class="sender">
+                                    -You
+                                </div>
+                                <div class="context">
+                                    Hello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message You">
+                                <div class="sender">
+                                    -You
+                                </div>
+                                <div class="context">
+                                    Hello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message notyou">
+                                <div class="sender">
+                                    - Raed
+                                </div>
+                                <div class="context">
+                                    Hello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message notyou">
+                                <div class="sender">
+                                    - Raed
+                                </div>
+                                <div class="context">
+                                    Hello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message notyou">
+                                <div class="sender">
+                                    - Raed
+                                </div>
+                                <div class="context">
+                                    Hello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message notyou">
+                                <div class="sender">
+                                    - Raed
+                                </div>
+                                <div class="context">
+                                    HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message You">
+                                <div class="sender">
+                                    -You
+                                </div>
+                                <div class="context">
+                                    HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+                        <div class="messagecontainer">
+                            <div class="message You">
+                                <div class="sender">
+                                    -You
+                                </div>
+                                <div class="context">
+                                    HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
+                                </div>
+                                <div class="time">
+                                    4:02PM
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <div class="bottomsection">
+                    <div class="plus">
+                        <span class="material-symbols-outlined">
+                            add_circle
+                        </span>
+                    </div>
+
+                    <div class="input">
+                        <span class="material-symbols-outlined edit">
+                            edit
+                        </span>
+                        <textarea class="message" placeholder="Message:"></textarea>
+
+                        <span class="material-symbols-outlined emoji">
+                            mood
+                        </span>
+                    </div>
+
+                    <div class="like">
+                        <span class="material-symbols-outlined like">
+                            thumb_up
+                        </span>
+                        <span class="material-symbols-outlined dislike" >
+                            thumb_down
+                        </span>
+                        <span class="material-symbols-outlined send" style="display: none;">
+                            send
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="moreinfo">
+                <div class="goback">
+                    <div>
+                        <span class="material-symbols-outlined">
+                            arrow_back
+                        </span>
+                    </div>
+                    
+                </div>
+                <div class="topsection">
+                    <div class="photo">
+                        <img src="../photo/1.png" alt="">
+                    </div>
+                    <div class="name">
+                        Raed Lafi
+                    </div>
+                    <div class="activetime">
+                        <div class="text">Active</div>&nbsp;
+                        <div class="time">Now</div>
+                    </div>
+                </div>
+                <div class="middlesection">
+                    <div class="deletespan">
+                        <div>
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </div>
+                    </div>
+                    <div class="text">
+                        Delete
+                    </div>
+                </div>
+                <div class="bottomsection">
+                    <div class="stylechat">
+                        <div class="text">
+                            Style Chat
+                        </div>
+                        <div class="span">
+                            <span class="material-symbols-outlined">
+                                chevron_right
+                            </span> 
+                        </div>
+                    </div>
+                    <div class="stylechat chatmembers">
+                        <div class="text">
+                            Chat Members
+                        </div>
+                        <div class="span">
+                            <span class="material-symbols-outlined">chevron_right</span> 
+                        </div>
+                    </div>
+                    <div class="members">
+                        <div class="member">
+
+                            <div class="leftside">
+                                <div class="photo">
+                                    <img src="../photo/10.png" alt="">
+                                </div>
+                                <div class="details">
+                                    <div class="nickname">
+                                        Set Nickname
+                                    </div>
+                                    <div class="fullname">
+                                        jawhar Hmidi
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rightside">
+                                <span class="material-symbols-outlined">
+                                    border_color
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="stylechat media">
+                        <div class="text">
+                            Media and Links
+                        </div>
+                        <div class="span">
+                            <span class="material-symbols-outlined">
+                                chevron_right
+                            </span> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span id="closePopupBtn" class="close">&times;</span>
+            <h2>Create Group</h2>
+            <hr style="width: 100%;">
+            <div class="content">
+                <div class="details">
+                    <div class="name">Group Name: <input type="text" required></div>
+                    <div class="profilepicture">Group Photo: <input required type="text"></div>
+                </div>
+                <div class="members">
+                    Members:
+                    <hr>
+                    <div class="searchcontainer">
+        
+                        <div class="searchinput">
+                            
+                            <span class="material-symbols-outlined">
+                                search
+                            </span>
+        
+                            <input type="text" placeholder="Search ">
+                    
+                        </div>
+                    
+                    </div>
+                    <div class="chatscontainer">
+
+                        <label class="userinfocontainer">
+
+                            <div class="photo">
+                                <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="profile picture">
+                            </div>
+
+                            <div class="userdetails">
+
+                                <div class="name">
+                                    jawhar05 hmidi
+                                </div>  
+
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="checkbox" onchange="verify()">
+                                <span class="checkmark"></span>
+                            </div>
+                        </label>
+
+                    </div>
+
+                    <div class="chatscontainer searchresult">
+
+                    </div>
+                </div>
+            </div>
+            <div class="create">
+                <input type="button" value="Create >" disabled>
+            </div>
+            
+        </div>
+    </div>
+    <div id="editnicknamepopup" class="popup editnicknamepopup">
+        <div class="popup-content" style="min-height: 0;">
+            <span id="editnicknameclosePopupBtn" class="close">&times;</span>
+            
+            <div class="content" style="margin-top: 0;">
+
+                <div class="details" style="display: flex;flex-direction: row;align-items: center;justify-content: center; margin-left: 0; gap: 8px;">
+
+                    <div class="name">
+                        <input id="newnicknameinput" type="text" required style="height: 34px; width: 300px;">
+                    </div>
+
+                    <input class="notdisabled editnicknamedone" type="button" value=">" style="color: white;height: 36px;width: 36px;">
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div id="popup" class="popup leavegrouppopup">
+        <div class="popup-content">
+            <h2>Are you Sure?</h2>
+            
+            <div class="create" style="margin: 0;display: flex;flex-direction: row;gap: 10px;">
+                <input class="notdisabled cancelbutton" type="button" value="Cancel" style="margin: 0;">
+                <input class="notdisabled" id="leavegroup" type="button" value="Leave" style="margin: 0;">
+            </div>
+            
+        </div>
+    </div>
+    <div id="addmemberpopup" class="popup addmemberpopup">
+        <div class="popup-content newmember">
+            <span id="addmemberclosePopupBtn" class="close">&times;</span>
+            <div class="content" style="margin: 0;">
+                <div class="members" style="margin: 0;">
+                    <div class="searchcontainer">
+        
+                        <div class="searchinput">
+                            
+                            <span class="material-symbols-outlined">
+                                search
+                            </span>
+        
+                            <input type="text" placeholder="Search ">
+                    
+                        </div>
+                    
+                    </div>
+                    <div class="chatscontainer">
+
+                        <label class="userinfocontainer">
+
+                            <div class="photo">
+                                <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="profile picture">
+                            </div>
+
+                            <div class="userdetails">
+
+                                <div class="name">
+                                    jawhar05 hmidi
+                                </div>  
+
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="checkbox" onchange="verify()">
+                                <span class="checkmark"></span>
+                            </div>
+                        </label>
+
+                    </div>
+
+                    <div class="chatscontainer searchresult">
+
+                    </div>
+                </div>
+            </div>
+            <div class="create">
+                <input type="button" value="Create >" disabled class="addmemberdone">
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
