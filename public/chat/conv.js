@@ -1,5 +1,0 @@
-const Mycode = (function(){
-    
-})
-
-Mycode();

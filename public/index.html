@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account: Sign In</title>
+    <script src="./axios.js"></script>
+    <script defer src="signin.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <link rel="stylesheet" href="signin.css">
+</head>
+<body onload="myLoad()">
+    <div id="toast">Login succeeded! Redirecting...</div>
+    <div class="contentcontainer">
+
+        <div class="welcomecontainer">
+            <div class="title">
+                Welcome to&nbsp;<div>Chat Nexus.</div>
+            </div>
+            <div class="line">
+                Connect, Chat, and Discover a Universe of Conversations!
+            </div>
+        </div>
+
+        <div class="authenticationcontainer">
+            
+            <div class="content">
+                <div class="title1">Login Account</div>
+                <div class="text">Please enter your Login and Password!</div>
+                <div class="inputs">
+                    <div class="input">
+                        <div class="identifier">
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                            <input type="text" placeholder="Username, Email, or Phone" id="identifier">
+                        </div>
+                        <div class="error">
+                            Please write a valid Login!
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="password">
+                            <span class="material-symbols-outlined">
+                                lock
+                            </span>
+                            <input type="password" placeholder="Password" id="password">
+                        </div>
+                        <div class="error">
+                            Please write a valid Password!
+                        </div>
+                    </div>
+                </div>
+                <div class="moredetails">
+                    <div class="checkbox-wrapper-4">
+                        <input class="inp-cbx" id="morning" type="checkbox"/>
+                        <label class="cbx" for="morning">
+                            <span>
+                                <svg width="12px" height="10px">
+                                    <use xlink:href="#check-4"></use>
+                                </svg>
+                            </span>
+                            <span>
+                                Keep me signed in
+                            </span>
+                        </label>
+                        <svg class="inline-svg">
+                          <symbol id="check-4" viewbox="0 0 12 10">
+                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                          </symbol>
+                        </svg>
+                    </div>
+
+                    <div class="createaccount">
+                        <a href="./signup">Create Account?</a>
+                    </div>
+                </div>
+                <div class="login">
+                    <input type="button" value="Login" id="login" onclick="Mycode()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

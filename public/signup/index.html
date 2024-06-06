@@ -4,81 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account: Sign Up</title>
-    <link rel="stylesheet" href="signup.css">
     <script src="../axios.js"></script>
     <script defer src="signup.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <link rel="stylesheet" href="signup.css">
 </head>
 <body>
-    <center>
-        <table>
-            
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    Sign Up
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    First Name:
-                </td>
-                <td>
-                    <input type="text" class="first_name">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Last Name:
-                </td>
-                <td>
-                    <input type="text" class="last_name"><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    E-mail:
-                </td>
-                <td>
-                    <input type="text" class="email">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Phone Number:
-                </td>
-                <td>
-                    <input type="text" class="phonenumber">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Username:
-                </td>
-                <td>
-                    <input type="text" class="username">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Password:
-                </td>
-                <td>
-                    <input type="text" class="password">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Profile Picture:
-                </td>
-                <td>
-                    <input type="text" class="profile_picture">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <input type="button" value="Sign In" class="signin">&nbsp;&nbsp;<input type="button" value="Sign Up" class="signup">
-                </td>
-            </tr>
-        </table>
-    </center>
+    <div id="toast">Register succeeded! Redirecting...</div>
+    <div class="authenticationcontainer">
+        <div class="content">
+            <div class="title1">Create Account</div>
+            <div class="text">Please enter a Valid Details!</div>
+            <div class="inputs">
+                <div class="double">
+                    <div class="input input1">
+                        <div class="identifier">
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                            <input type="text" placeholder="First Name" id="first_name">
+                        </div>
+                        <div class="error error1">
+                            Please write a valid First Name!
+                        </div>
+                    </div>
+                    <div class="input input2">
+                        <div class="identifier">
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                            <input type="text" placeholder="Last Name" id="last_name">
+                        </div>
+                        <div class="error error2">
+                            Please write a valid Last Name!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input">
+                    <div class="identifier">
+                        <span class="material-symbols-outlined">
+                            mail
+                        </span>
+                        <input type="text" placeholder="Email" id="email">
+                    </div>
+                    <div class="error">
+                        Please write a valid Email!
+                    </div>
+                </div>
+
+                <div class="double">
+                    <div class="input">
+                        <div class="identifier">
+                            <span class="material-symbols-outlined">
+                                assignment_Ind 
+                            </span>
+                            <input type="text" placeholder="Username" id="username">
+                        </div>
+                        <div class="error error1">
+                            Please write a valid Username!
+                        </div>
+                    </div>
+                    <div class="input">
+                        <div class="identifier">
+                            <span class="material-symbols-outlined">
+                                call
+                            </span>
+                            <input type="text" onKeyDown="checkIfNumber(event)" placeholder="Phone Number" id="phonenumber">
+                        </div>
+                        <div class="error error2">
+                            Please write a valid Phone!
+                        </div>
+                    </div>
+                </div>
+                <div class="input">
+                    <div class="password">
+                        <span class="material-symbols-outlined">
+                            lock
+                        </span>
+                        <input type="password" placeholder="Password" id="password">
+                    </div>
+                    <div class="error">
+                        Please write a valid Password!
+                    </div>
+                </div>
+                <div class="input">
+                    <div class="password">
+                        <span class="material-symbols-outlined">
+                            lock
+                        </span>
+                        <input type="password" placeholder="Confirm Password" id="confirmpassword" onblur="checkConfirmPassword()">
+                    </div>
+                    <div class="error" id="confirmpassworderror">
+                        Passwords do not match.
+                    </div>
+                </div>
+            </div>
+            <div class="moredetails">
+                <div class="checkbox-wrapper-4">
+                    <input class="inp-cbx" id="morning" type="checkbox"/>
+                    <label class="cbx" for="morning">
+                        <span>
+                            <svg width="12px" height="10px">
+                                <use xlink:href="#check-4"></use>
+                            </svg>
+                        </span>
+                        <span>
+                            I agree to the <a href="/terms_and_conditions" target="_blank">Terms & Conditions.</a>
+                        </span>
+                    </label>
+                    <svg class="inline-svg">
+                        <symbol id="check-4" viewbox="0 0 12 10">
+                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                        </symbol>
+                    </svg>
+                </div>
+
+                <div class="createaccount">
+                    <a href="../">Already have an Account?</a>
+                </div>
+            </div>
+            <div class="login">
+                <input type="button" value="Register" id="login" onclick="Mycode()">
+                <div class="error" style="z-index: -9;">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
