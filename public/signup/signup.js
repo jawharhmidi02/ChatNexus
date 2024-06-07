@@ -109,7 +109,7 @@ const Mycode = (async function () {
         error[2].style = "display: none !important";
     }
     // Username
-    if (username.value.length < 6) {
+    if (username.value.length < 6 || username.value.includes(' ')) {
         username.parentElement.classList.add("empty");
         error[3].style = "display: flex !important";
         test = true;
@@ -217,11 +217,17 @@ const Mycode = (async function () {
 
         document.cookie = "username=; path=/; ";
         document.cookie = "password=; path=/; ";
+        var currentDate = new Date();
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        var expires = "expires=" + currentDate.toUTCString();
 
+        document.cookie = "username=" + encodeURIComponent(username.value) + "; path=/; " + expires;
+        document.cookie = "password=" + encodeURIComponent(password.value) + "; path=/; " + expires;
+    
         showToast();
 
         setTimeout(function() {
-            window.location.href = "../";
+            window.location.href = "./profilepicture.html";
         }, 3000);
     } catch (error) {
         console.log(error);

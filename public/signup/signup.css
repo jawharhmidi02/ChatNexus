@@ -207,21 +207,20 @@ body{
     .contentcontainer{
         width: 90vw;
     }
+    .authenticationcontainer{
+        width: 80vw;
+    }
 }
 
 @media screen and ( max-width: 940px ){
-    .title{
-        font-size: 2.5vw;
-        margin-top: 30vh;
+    .input{
+        width: 100% !important;
     }
-    .title div{
-        font-size: 3vw;
+    .double .identifier{
+        width: 100% !important;
     }
-    .line{
-        font-size: 1.5vw;
-    }
-    .welcomecontainer{
-        max-width: 35%;
+    .moredetails{
+        flex-direction: column;
     }
 }
 
@@ -235,32 +234,9 @@ body{
         width: 100vw;
         height: max-content;
     }
-    .welcomecontainer{
-        min-width: 100vw;
-        margin-top: 12vh;
-        margin-left: 0;
-        margin-bottom: 10vh;
-        justify-content: center;
-        align-items: center;
-    }
-    .title{
-        margin-top: 0;
-        font-size: 6vw;
-        margin-bottom: 10px;
-        width: 80%;
-    }
-    .title div{
-        font-size: 8vw;
-    }
-    .line{
-        font-size: 3vw;
-    }
     .authenticationcontainer{
         min-width: 100vw;
         
-    }
-    .authenticationcontainer .content{
-        min-height: 60vh;
     }
     .title1{
         font-size: 8vw;
@@ -274,11 +250,19 @@ body{
     .createaccount{
         margin-top: 7px;
     }
-    /* .checkbox-wrapper-4 .cbx span:last-child{
-        font-size: 3vw;
-    } */
+    .double{
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
 }
-
+@media screen and ( max-width: 570px ){
+    .checkbox-wrapper-4 .cbx span:last-child,.createaccount{
+        font-size: 3vw;
+    }
+    input[type=text]{
+        font-size: 4vw;
+    }
+}
 
 /* checkbox */
 

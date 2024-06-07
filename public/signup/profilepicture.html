@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account: Upload PFP</title>
+    <script src="../axios.js"></script>
+    <script defer src="profilepicture.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <link rel="stylesheet" href="profilepicture.css">
+</head>
+<body onload="myCode()">
+    <div id="toast">Register succeeded! Redirecting...</div>
+    <div class="title">
+        Change Your Profile Picture
+    </div>
+    <div class="uploadcontainer">
+        
+        <div class="photo">
+            <img src="../photos/default.png" alt="" id="photocontainer">
+        </div>
+        <div class="upload">
+            <input type="file" id="fileinput" accept="image/*" onchange="uploadchange()">
+            <input type="button" value="Upload" id="uploadbutton" onclick="clickupload()">
+        </div>
+    </div>
+    <div class="buttons">
+        <input type="button" value="skip" class="skip" onclick="window.location.href = '../chat'">
+        <input type="button" value="Done" class="done" onclick="doneupload()">
+    </div>
+</body>
+</html>
