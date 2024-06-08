@@ -229,8 +229,8 @@ const Mycode = (async function () {
         setTimeout(function() {
             window.location.href = "./profilepicture.html";
         }, 3000);
-    } catch (error) {
-        console.log(error);
+    } catch (err) {
+        console.log(err);
         error[7].innerHTML = "Error, Please try again!";
         error[7].style = "display: flex !important;z-index: -9;";
     }

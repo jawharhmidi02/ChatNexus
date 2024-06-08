@@ -360,11 +360,17 @@ const myCode = (async function(){
 
         for(let message of messagedata){
             const contx = message.content;
-            const time = message.created_at; 
-            if(message.sender==username){
-                sendmessage("You", contx, time)
-            }else{
-                sendmessage(message.sender, contx, time, convdata)
+            const time = message.created_at;
+            if(message.deleted){
+                sendmessage("Deleted", contx, time, convdata)
+            }
+            else{
+
+                if(message.sender==username){
+                    sendmessage("You", contx, time)
+                }else{
+                    sendmessage(message.sender, contx, time, convdata)
+                }
             }
         }
 
@@ -1277,18 +1283,24 @@ const myCode = (async function(){
 
         const sender = document.createElement("div");
         sender.classList.add("sender");
-        if(sendername != "You"){
+        if(sendername == "Deleted"){
             message.classList.add("message", 'notyou');
-            if(convdata == null){
-                const data = await axios.get("/api/conversations/byid/"+conversationid);
-                convdata = data.data;
-            }
-            let parts = convdata.nicknames[sendername].split(" ");
-            sender.innerHTML = "- "+parts[0];
+            sender.innerHTML = "-Deleted User";
         }
         else{
-            message.classList.add("message",sendername);
-            sender.innerHTML = "- "+sendername;
+            if(sendername != "You"){
+                message.classList.add("message", 'notyou');
+                if(convdata == null){
+                    const data = await axios.get("/api/conversations/byid/"+conversationid);
+                    convdata = data.data;
+                }
+                let parts = convdata.nicknames[sendername].split(" ");
+                sender.innerHTML = "- "+parts[0];
+            }
+            else{
+                message.classList.add("message",sendername);
+                sender.innerHTML = "- "+sendername;
+            }
         }
 
         
@@ -1327,6 +1339,19 @@ const myCode = (async function(){
         conversationcontainer.appendChild(messagecontainer);
 
         messagecontainer.scrollIntoView({behavior: "smooth"});
+    }
+
+    const logout = (function(){
+        document.cookie = "username=; path=/; ";
+        document.cookie = "password=; path=/; ";
+        window.location.href = "../";
+    })
+    
+    function showToast(text) {
+        var x = document.getElementById("toast");
+        x.innerHTML = text;
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
     const chats = document.querySelectorAll(".userscontainer .chatscontainer .userinfocontainer");
@@ -1549,7 +1574,12 @@ const myCode = (async function(){
     const password = getCookie('password');
 
     if(username==null || username=="" || password==null || password==""){
-        document.body.innerHTML = "Error";
+        showToast("Authentication error, Try Again!");
+        setTimeout(function(){
+            document.cookie = "username=; path=/; ";
+            document.cookie = "password=; path=/; ";
+            window.location.href = "../";}
+        ,2000);
         return;
     }
 
@@ -1557,7 +1587,12 @@ const myCode = (async function(){
     const useraccount = useraccountdata.data;
 
     if(useraccount==null){
-        document.body.innerHTML = "Error";
+        showToast("Authentication error, Going Back...!");
+        setTimeout(function(){
+            document.cookie = "username=; path=/; ";
+            document.cookie = "password=; path=/; ";
+            window.location.href = "../";}
+        ,2000);
         return;
     }
 

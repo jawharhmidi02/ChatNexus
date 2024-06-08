@@ -3,22 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>ChatNexus: Profile</title>
+    <link rel="shortcut icon" href="../photos/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
     <script src="../axios.js"></script>
     <script src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
     <script defer src="script.js"></script>
 </head>
-<body>
-    <h1>Upload Profile Picture</h1>
-    <form id="uploadForm" enctype="multipart/form-data">
-      <input type="file" name="profilePicture" required>
-      <button type="submit">Upload</button>
-      <img src=".." alt="" srcset="">
-    </form>
-    <div id="message"></div>
-  
+<body onload="myCode()">
+  <div id="toast">Register succeeded! Redirecting...</div>
+  <div class="menucontainer">
+    <div class="title">
+      Jawhar Hmidi
+    </div>
+    <div class="menu">
+      <div class="profile" onclick="profile()">
+        Profile
+      </div>
+      <div class="chat" onclick="window.location.href='../chat/'">
+        Chat
+      </div>
+      <div class="about" onclick="window.open('https://luminous-centaur-d51d22.netlify.app/')">
+        About Developer
+      </div>
+      <div class="change" onclick="change()">
+        Change Password
+      </div>
+      <div class="delete" onclick="deleteaccount()">
+        Delete Account
+      </div>
+      <div class="logout" onclick="logout()">
+        Logout
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    
+    <div class="profile-container">
+      <div class="ham">
+        <span class="material-symbols-outlined" onclick="showmenu()">
+          menu
+        </span>
+      </div>
+      <div class="uploadcontainer">
+        <div class="photo">
+            <img src="../photos/default.png" alt="" id="photocontainer">
+        </div>
+        <div class="upload">
+            <input type="file" id="fileinput" accept="image/*" onchange="uploadchange()">
+            <input type="button" value="Upload New Photo" id="uploadbutton" onclick="clickupload()">
+        </div>
+      </div>
+      <div class="inputs">
+            <div class="input input1">
+                <div class="identifier">
+                    <span class="material-symbols-outlined">
+                        person
+                    </span>
+                    <input type="text" placeholder="First Name" id="first_name">
+                </div>
+                <div class="error error1">
+                    Please write a valid First Name!
+                </div>
+            </div>
+            <div class="input input2">
+                <div class="identifier">
+                    <span class="material-symbols-outlined">
+                        person
+                    </span>
+                    <input type="text" placeholder="Last Name" id="last_name">
+                </div>
+                <div class="error error2">
+                    Please write a valid Last Name!
+                </div>
+            </div>
+
+        <div class="input">
+            <div class="identifier">
+                <span class="material-symbols-outlined">
+                    mail
+                </span>
+                <input type="text" placeholder="Email" id="email">
+            </div>
+            <div class="error">
+                Please write a valid Email!
+            </div>
+        </div>
+
+            <div class="input">
+                <div class="identifier">
+                    <span class="material-symbols-outlined">
+                        assignment_Ind 
+                    </span>
+                    <input type="text" placeholder="Username" id="username">
+                </div>
+                <div class="error error1">
+                    Please write a valid Username!
+                </div>
+            </div>
+            <div class="input">
+                <div class="identifier">
+                    <span class="material-symbols-outlined">
+                        call
+                    </span>
+                    <input type="text" onKeyDown="checkIfNumber(event)" placeholder="Phone Number" id="phonenumber">
+                </div>
+                <div class="error error2">
+                    Please write a valid Phone!
+                </div>
+            </div>
+      </div>
+      <div class="error">
+        Error! Please try Again!
+      </div>
+      <div class="buttons">
+        <input type="button" value="Save" class="done" onclick="saveprofile()">
+      </div>
+    </div>
+    <div class="change-container">
+      <div class="ham">
+        <span class="material-symbols-outlined" onclick="showmenu()">
+          menu
+        </span>
+      </div>
+      <div class="title">
+        Change Password
+      </div>
+      <div class="inputs">
+        <div class="input">
+          <div class="password">
+              <span class="material-symbols-outlined">
+                  lock
+              </span>
+              <input type="password" placeholder="Current Password" id="current_password">
+          </div>
+          <div class="error">
+              Password is Wrong!
+          </div>
+        </div>
+        <div class="input">
+          <div class="password">
+              <span class="material-symbols-outlined">
+                  lock
+              </span>
+              <input type="password" placeholder="New Password" id="password" onblur="checkConfirmPassword()">
+          </div>
+          <div class="error">
+              Please write a valid Password!
+          </div>
+        </div>
+        <div class="input">
+            <div class="password">
+                <span class="material-symbols-outlined">
+                    lock
+                </span>
+                <input type="password" placeholder="Confirm New Password" id="confirmpassword" onblur="checkConfirmPassword()">
+            </div>
+            <div class="error" id="confirmpassworderror">
+                Passwords do not match.
+            </div>
+        </div>
+      </div>
+      <div class="error">
+        Error! Please try Again!
+      </div>
+      <div class="buttons">
+        <input type="button" value="Save" class="done" onclick="change_password()">
+      </div>
+    </div>
+    <div class="delete-container">
+      <div class="ham" >
+        <span class="material-symbols-outlined" onclick="showmenu()">
+          menu
+        </span>
+      </div>
+      <div class="title">
+        Delete Account
+      </div>
+      <div class="text">
+        Are you Sure? All your Data will be deleted immediately!
+      </div>
+      <div class="buttons">
+        <input type="button" class="done" value="Confirm" onclick="confirm_delete()">
+      </div>
+    </div>
+  </div>
     
 </body>
 </html>

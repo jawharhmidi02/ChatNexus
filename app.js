@@ -5,16 +5,7 @@ const Accounts = require('./routes/account');
 const Conversations = require('./routes/conversation');
 const Messages = require('./routes/message');
 const db = require('./db/connect');
-const rateLimit = require('express-rate-limit');
 const path = require('path');
-const multer = require('multer');
-
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, 
-  max: 400
-});
-
-app.use(limiter);
 
 require('dotenv').config();
 

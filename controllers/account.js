@@ -75,6 +75,10 @@ const getAccountByPhoneNumber = async(req, res)=>{
 
 const updateAccountByUsername = async(req, res)=>{
     const {username: username, password: password} = req.params;
+    console.log(req.body);
+    if(req.body.password){
+        req.body.password = await bcrypt.hash(req.body.password, 10);
+    }
     try{
 
         const check = await Account.findOne({username : username})
@@ -87,13 +91,13 @@ const updateAccountByUsername = async(req, res)=>{
             
             const isMatch = await bcrypt.compare(password, check.password);
             if(!isMatch){
-                return res.status(404).json({msg: `No Account found with username: ${username} and password: ${passowrd}`});
+                return res.status(404).json({msg: `No Account found with username: ${username} and password: ${password}`});
             }
 
-            const send = await Account.findOneAndUpdate({username: username}, req.body, {new: true, runValidators: true})
         }
         
         await User.findOneAndUpdate({ username: username }, req.body, {new: true, runValidators: true});
+        const send = await Account.findOneAndUpdate({username: username}, req.body, {new: true, runValidators: true})
         res.status(200).json(send);
     }
     catch(err){
@@ -114,7 +118,7 @@ const updateAccountByEmail = async(req, res)=>{
             
             const isMatch = await bcrypt.compare(password, check.password);
             if(!isMatch){
-                return res.status(404).json({msg: `No Account found with email: ${email} and password: ${passowrd}`});
+                return res.status(404).json({msg: `No Account found with email: ${email} and password: ${password}`});
             }
 
             const send = await Account.findOneAndUpdate({email: email}, req.body, {new: true, runValidators: true})
@@ -141,7 +145,7 @@ const updateAccountByPhoneNumber = async(req, res)=>{
             
             const isMatch = await bcrypt.compare(password, check.password);
             if(!isMatch){
-                return res.status(404).json({msg: `No Account found with phonenumber: ${phonenumber} and password: ${passowrd}`});
+                return res.status(404).json({msg: `No Account found with phonenumber: ${phonenumber} and password: ${password}`});
             }
 
             const send = await Account.findOneAndUpdate({phonenumber: phonenumber}, req.body, {new: true, runValidators: true})
@@ -167,7 +171,7 @@ const deleteAccountByUsername = async(req, res)=>{
             
             const isMatch = await bcrypt.compare(password, check.password);
             if(!isMatch){
-                return res.status(404).json({msg: `No Account found with username: ${username} and password: ${passowrd}`});
+                return res.status(404).json({msg: `No Account found with username: ${username} and password: ${password}`});
             }
 
             const send = await Account.findOneAndDelete({username: username, password: password})
@@ -195,7 +199,7 @@ const deleteAccountByEmail = async(req, res)=>{
             
             const isMatch = await bcrypt.compare(password, check.password);
             if(!isMatch){
-                return res.status(404).json({msg: `No Account found with email: ${email} and password: ${passowrd}`});
+                return res.status(404).json({msg: `No Account found with email: ${email} and password: ${password}`});
             }
             
             const send = await Account.findOneAndDelete({email: email, password: password})
@@ -221,7 +225,7 @@ const deleteAccountByPhoneNumber = async(req, res)=>{
             
             const isMatch = await bcrypt.compare(password, check.password);
             if(!isMatch){
-                return res.status(404).json({msg: `No Account found with phonenumber: ${phonenumber} and password: ${passowrd}`});
+                return res.status(404).json({msg: `No Account found with phonenumber: ${phonenumber} and password: ${password}`});
             }
             
             const send = await Account.findOneAndDelete({phonenumber: phonenumber, password: password})
@@ -245,7 +249,7 @@ const uploadProfilePictureByUsername = async(req, res)=>{
 
         const isMatch = await bcrypt.compare(password, check.password);
         if(!isMatch){
-            return res.status(404).json({msg: `No Account found with username: ${username} and password: ${passowrd}`});
+            return res.status(404).json({msg: `No Account found with username: ${username} and password: ${password}`});
         }
         console.log(req.body)
 

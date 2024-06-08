@@ -125,7 +125,7 @@ img{
 /* Toast Notification */
 
 #toast {
-    visibility: visible;
+    visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
     background-color: #333;

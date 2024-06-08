@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../photos/icon.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatNexus: Chat</title>
     <link rel="stylesheet" href="chat.css">
@@ -11,6 +12,7 @@
     <script defer src="style.js"></script>
 </head>
 <body>
+    <div id="toast">Register succeeded! Redirecting...</div>
     <div class="pagecontainer">
         
         <div class="userscontainer">
@@ -22,7 +24,7 @@
 
                 <div class="icons">
                     
-                    <div class="profile">
+                    <div class="profile" onclick="window.location.href='../profile/'">
                         <span class="material-symbols-outlined">person</span>
                     </div>
                     
@@ -101,26 +103,26 @@
                             </span>
                         </div>
                         <div class="photo">
-                            <img src="../photo/13.png" alt="">
+                            <img src="" alt="">
                         </div>
     
                         <div class="userdetails">
                             <div class="name">
-                                Jawhar Hmidi
+                               
                             </div>
                             <div class="lastmessage">
                                 <div class="msg">Active:</div> 
-                                <div class="time">&nbsp;1 hour ago</div>
+                                <div class="time"></div>
                             </div>
                         </div>
                         
                     </div>
                     <div class="rightside">
-                        <div class="searchdiv">
+                        <!-- <div class="searchdiv">
                             <span class="material-symbols-outlined search">
                                 search
                             </span>
-                        </div>
+                        </div> -->
                         
                         <span class="material-symbols-outlined openmoreinfo">
                             keyboard_double_arrow_left
@@ -132,157 +134,26 @@
 
                     <div class="convcontainer">
 
-                        <div class="messagecontainer">
-                            <div class="message notyou">
-                                <div class="sender">
-                                    - Raed
-                                </div>
-                                <div class="context">
-                                    Hello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message You">
-                                <div class="sender">
-                                    -You
-                                </div>
-                                <div class="context">
-                                    Hello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message You">
-                                <div class="sender">
-                                    -You
-                                </div>
-                                <div class="context">
-                                    Hello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message You">
-                                <div class="sender">
-                                    -You
-                                </div>
-                                <div class="context">
-                                    Hello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message notyou">
-                                <div class="sender">
-                                    - Raed
-                                </div>
-                                <div class="context">
-                                    Hello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message notyou">
-                                <div class="sender">
-                                    - Raed
-                                </div>
-                                <div class="context">
-                                    Hello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message notyou">
-                                <div class="sender">
-                                    - Raed
-                                </div>
-                                <div class="context">
-                                    Hello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message notyou">
-                                <div class="sender">
-                                    - Raed
-                                </div>
-                                <div class="context">
-                                    HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message You">
-                                <div class="sender">
-                                    -You
-                                </div>
-                                <div class="context">
-                                    HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-                        <div class="messagecontainer">
-                            <div class="message You">
-                                <div class="sender">
-                                    -You
-                                </div>
-                                <div class="context">
-                                    HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
-                                </div>
-                                <div class="time">
-                                    4:02PM
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     
                 </div>
 
                 <div class="bottomsection">
-                    <div class="plus">
+                    <!-- <div class="plus">
                         <span class="material-symbols-outlined">
                             add_circle
                         </span>
-                    </div>
+                    </div> -->
 
                     <div class="input">
                         <span class="material-symbols-outlined edit">
                             edit
                         </span>
                         <textarea class="message" placeholder="Message:"></textarea>
-
+<!-- 
                         <span class="material-symbols-outlined emoji">
                             mood
-                        </span>
+                        </span> -->
                     </div>
 
                     <div class="like">
@@ -310,14 +181,13 @@
                 </div>
                 <div class="topsection">
                     <div class="photo">
-                        <img src="../photo/1.png" alt="">
+                        <img src="" alt="">
                     </div>
                     <div class="name">
-                        Raed Lafi
                     </div>
                     <div class="activetime">
                         <div class="text">Active</div>&nbsp;
-                        <div class="time">Now</div>
+                        <div class="time"></div>
                     </div>
                 </div>
                 <div class="middlesection">
@@ -333,7 +203,7 @@
                     </div>
                 </div>
                 <div class="bottomsection">
-                    <div class="stylechat">
+                    <!-- <div class="stylechat">
                         <div class="text">
                             Style Chat
                         </div>
@@ -342,7 +212,7 @@
                                 chevron_right
                             </span> 
                         </div>
-                    </div>
+                    </div> -->
                     <div class="stylechat chatmembers">
                         <div class="text">
                             Chat Members
@@ -352,39 +222,7 @@
                         </div>
                     </div>
                     <div class="members">
-                        <div class="member">
-
-                            <div class="leftside">
-                                <div class="photo">
-                                    <img src="../photo/10.png" alt="">
-                                </div>
-                                <div class="details">
-                                    <div class="nickname">
-                                        Set Nickname
-                                    </div>
-                                    <div class="fullname">
-                                        jawhar Hmidi
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="rightside">
-                                <span class="material-symbols-outlined">
-                                    border_color
-                                </span>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="stylechat media">
-                        <div class="text">
-                            Media and Links
-                        </div>
-                        <div class="span">
-                            <span class="material-symbols-outlined">
-                                chevron_right
-                            </span> 
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -422,13 +260,13 @@
                         <label class="userinfocontainer">
 
                             <div class="photo">
-                                <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="profile picture">
+                                <img src="" alt="profile picture">
                             </div>
 
                             <div class="userdetails">
 
                                 <div class="name">
-                                    jawhar05 hmidi
+                                    
                                 </div>  
 
                             </div>
@@ -505,13 +343,13 @@
                         <label class="userinfocontainer">
 
                             <div class="photo">
-                                <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg" alt="profile picture">
+                                <img src="" alt="profile picture">
                             </div>
 
                             <div class="userdetails">
 
                                 <div class="name">
-                                    jawhar05 hmidi
+                                    
                                 </div>  
 
                             </div>

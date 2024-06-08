@@ -2,6 +2,11 @@
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body, html{
+    overflow: hidden;
 }
 
 .showmoreinfo{
@@ -299,6 +304,7 @@
 .chatcontainer .conversation{
     height: 100vh;
     max-height: 100vh;
+
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -856,6 +862,9 @@
         width: 100vw;
         min-width: 0;
     }
+    .chatcontainer .conversation{
+        max-height: 100%;
+    }
     .chatcontainer .conversation .topsection .userdetails .name{
         font-size: 18px;
     }
@@ -1292,4 +1301,48 @@
 
 .addmemberstyle:hover{
     background-color: #acacad6c;
+}
+
+/* Toast Notification */
+
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 4s;
+    animation: fadein 0.5s, fadeout 0.5s 4s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }

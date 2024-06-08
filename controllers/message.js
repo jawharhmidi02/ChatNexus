@@ -67,8 +67,23 @@ const getMessageById = async(req, res)=>{
     }
 }
 
+const getMessageBySender = async(req, res)=>{
+    const {sender: sender} = req.params;
+
+    try{
+        const send = await Message.find({sender});
+        return res.status(200).json(send);
+    }
+    catch(err){
+        return res.status(500).json({msg: err});
+    }
+}
+
 const updateMessageById = async(req, res)=>{
     const {id: id} = req.params;
+    if(req.body.content){
+        req.body.content = encrypt(req.body.content);
+    }
     try{
         const send = await Message.findByIdAndUpdate(id, req.body, {new: true});
         return res.status(200).json(send);
@@ -82,6 +97,7 @@ const updateMessageById = async(req, res)=>{
 module.exports = {
     getMessageById,
     getMessagesByConversationId,
+    getMessageBySender,
     createMessage,
     updateMessageById
 };

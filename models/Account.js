@@ -10,13 +10,11 @@ const AccountSchema = new mongoose.Schema({
         type: String,
         required : [true, 'Must provide a phone number !'],
         trim: true,
-        length: [8, 'phone number has to be composed out of 8 digits ! ']
     },
     password : {
         type: String,
         required : [true, 'Must provide a password ! '],
         trim: true,
-        minlength: [8, 'password can not be less than 8 characters !']
     },
     first_name : {
         type: String,
@@ -36,7 +34,6 @@ const AccountSchema = new mongoose.Schema({
         type: String,
         required : [true, 'Must provide an email ! '],
         trim : true,
-        maxlength : [40, 'email can not be more than 40 characters ! ']
     },
     profile_picture : {
         type: String,
