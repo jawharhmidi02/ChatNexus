@@ -6,7 +6,7 @@ const Conversations = require('./routes/conversation');
 const Messages = require('./routes/message');
 const db = require('./db/connect');
 const path = require('path');
-const http = require('http'); // Import http module
+const http = require('http'); 
 
 require('dotenv').config();
 
@@ -21,10 +21,8 @@ app.use('/api/conversations', Conversations);
 app.use('/api/messages', Messages);
 app.use('/uploads', express.static(path.join(__dirname, 'photos')));
 
-// Create HTTP server
 const server = http.createServer(app);
 
-// Initialize Socket.IO
 const io = require('socket.io')(server, {
   cors: {
     origin: "*"
