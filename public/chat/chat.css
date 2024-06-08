@@ -5,10 +5,6 @@
     box-sizing: border-box;
 }
 
-body, html{
-    overflow: hidden;
-}
-
 .showmoreinfo{
     display: flex !important;
 }
