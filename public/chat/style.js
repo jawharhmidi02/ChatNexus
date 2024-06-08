@@ -1340,12 +1340,6 @@ const myCode = (async function(){
 
         messagecontainer.scrollIntoView({behavior: "smooth"});
     }
-
-    const logout = (function(){
-        document.cookie = "username=; path=/; ";
-        document.cookie = "password=; path=/; ";
-        window.location.href = "../";
-    })
     
     function showToast(text) {
         var x = document.getElementById("toast");
@@ -1598,7 +1592,7 @@ const myCode = (async function(){
 
     document.querySelector(".firstpagecontainer .firstpage .title h1 .first_name").innerHTML = useraccount.first_name;
 
-    const socket = io('ws://localhost:3001');
+    const socket = io(window.location.origin.replace(/^http/, 'ws'));
 
     socket.emit("authenticate",{ username, conversations_id: useraccount.conversations});
 
