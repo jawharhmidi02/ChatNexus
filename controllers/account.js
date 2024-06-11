@@ -246,8 +246,6 @@ const {
   CLOUDINARY_API_SECRET: api_secret
 } = process.env;
 cloudinary.config({ cloud_name, api_key, api_secret });
-console.log(cloud_name, api_key, api_secret);
-
 
 const uploadProfilePictureByUsername = async(req, res)=>{
     const {username: username, password: password} = req.params;
@@ -262,24 +260,21 @@ const uploadProfilePictureByUsername = async(req, res)=>{
         if(!isMatch){
             return res.status(404).json({msg: `No Account found with username: ${username} and password: ${password}`});
         }
-        console.log("e1",req.file);
+        console.log("e1",cloud_name, api_key, api_secret);
 
         const file = req.file;
         const uploadResult = await cloudinary.uploader.upload(req.file.path, {
             public_id: file.filename
         }).catch((error)=>{console.log(error)});
         
-        console.log("e2",uploadResult);
 
         const send = await Account.findOneAndUpdate({username: username}, { profile_picture: uploadResult.url }, {new: true, runValidators: true})
-        console.log("e3",uploadResult.url);
         
         await User.findOneAndUpdate({ username: username }, { profile_picture: uploadResult.url }, {new: true, runValidators: true});
         
         return res.status(200).json(send);
     }
     catch(err){
-        console.log("err");
         return res.status(500).json(err);
     }
 }
