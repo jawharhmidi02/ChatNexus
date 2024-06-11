@@ -52,6 +52,7 @@ const doneupload = (async function(){
         setTimeout(function(){ window.location.href = "../"; }, 3000);
         return;
     }
+    showToast('Uploading...');
 
     const fileinput = document.getElementById('fileinput');
     const formData = new FormData();
@@ -59,7 +60,7 @@ const doneupload = (async function(){
 
     try {
         const response = await axios.post(`/api/accounts/uploadprofilepicture/${username}&${password}`, formData);
-        showToast('Profile picture uploaded successfully!, Redirecting...');
+        showToast('uploaded successfully!, Redirecting...');
         setTimeout(function(){ window.location.href = "../chat/"; }, 3000);
     } 
     catch (error) {
