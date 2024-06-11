@@ -11,9 +11,9 @@
 
 .pagecontainer{
     width: 100vw;
-    height: 100vh;
     display: grid;
     grid-template-columns: 25% 75%;
+    height: calc(var(--vh, 1vh) * 100);
 }
 
 .userscontainer{
@@ -994,7 +994,7 @@
     margin-left: 10px;
 }
 
-.popup-content .content .details input{
+.popup-content .content .details .name input{
     height: 24px;
     width: 200px;
     border-radius: 5px;
@@ -1341,4 +1341,14 @@
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+#editnicknamepopup #newnicknameinput{
+    width: 100% !important;
+    max-width: 300px;
+
+}
+
+#editnicknamepopup .popup-content{
+    width: 90% !important;
 }

@@ -551,23 +551,7 @@ const myCode = (async function(){
                             userinfocontainer.appendChild(userdetails);
                             searchresultcontainer.appendChild(userinfocontainer);
                         });
-        
-                        // For Groups
-                        const sorters1 = document.createElement("div");
-                        sorters1.classList.add("sorters");
-        
-                        const text1 = document.createElement("div");
-                        text1.classList.add("text");
-                        text1.innerHTML = "&nbsp;&nbsp;Groups";
-        
-                        const hr1 = document.createElement("hr");
-        
-                        sorters1.appendChild(text1);
-                        sorters1.appendChild(hr1);
-        
-                        searchresultcontainer.appendChild(sorters1);
-        
-                        console.log(searchresults.data);
+
                     } catch (error) {
                         if (axios.isCancel(error)) {
                             console.log('Request canceled', error.message);
@@ -663,18 +647,20 @@ const myCode = (async function(){
             else{
                 groupphoto.classList.remove("empty");
             }
-
-            const newgroupconvo = await axios.post("/api/conversations",{
+            showToastcreategroup("Creating! Please wait...")
+            const formData = new FormData();
+            formData.append('profilePicture', groupphoto.files[0]);
+            const body = {
                 name: groupname.value,
                 members: convmembers,
-                profile_picture: groupphoto.value,
                 group: true,
                 nicknames: nicknames,
                 last_message: `${useraccount.first_name} ${useraccount.last_name} Created this Group!`,
                 last_message_time: new Date()
-            });
+            };
+            const newgroupconvo = await axios.post("/api/conversations", body);
             const newgroupconvodata = newgroupconvo.data;
-
+            await axios.post(`/api/conversations/uploadpfp/${newgroupconvodata._id}`, formData)
             await axios.post("/api/messages",{
                 conversation_id: newgroupconvodata._id,
                 sender: username,
@@ -689,7 +675,16 @@ const myCode = (async function(){
                 conversation_id: newgroupconvodata._id,
                 members: newgroupconvodata.members,
             });
-            popup.style.display = 'none';
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('convid', encodeURIComponent(newgroupconvodata._id));
+            history.pushState(null, '', newUrl);    
+            
+            showToastcreategroup("Done! Redirecting...")
+            setTimeout(function(){ 
+                popup.style.display = 'none';
+                loadconv()
+            }, 3000)
+            
         })
 
         openPopupBtn.addEventListener('click', () => {
@@ -1264,7 +1259,202 @@ const myCode = (async function(){
             }
         });
 
-
+        likebutton.addEventListener("click", async function(){
+            let idconv = getUrlParameter('convid');
+            let sender = username;
+            let message = `material-symbols-outlined.like`;
+            let time = new Date();
+            await axios.post("/api/messages",{
+                conversation_id: idconv,
+                sender: sender,
+                content: message,
+                reacts: [],
+                created_at: time,
+                edited: false,
+                deleted: false
+            })
+            socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
+            const convcontainer = document.getElementById(`${idconv}`)
+            convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
+            convcontainer.querySelector(".msg").innerHTML = `<span class="material-symbols-outlined like">thumb_up</span> -&nbsp;`;
+            await axios.patch(`/api/conversations/byid/${idconv}`,{last_message: `<span class="material-symbols-outlined like">thumb_up</span>`, last_message_time: time});
+            sendmessage('You', message, time);
+    
+        })
+    
+        dislikebutton.addEventListener("click", async function(){
+            let idconv = getUrlParameter('convid');
+            let sender = username;
+            let message = `material-symbols-outlined.dislike`;
+            let time = new Date();
+            await axios.post("/api/messages",{
+                conversation_id: idconv,
+                sender: sender,
+                content: message,
+                reacts: [],
+                created_at: time,
+                edited: false,
+                deleted: false
+            })
+            socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
+            const convcontainer = document.getElementById(`${idconv}`)
+            convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
+            convcontainer.querySelector(".msg").innerHTML = `<span class="material-symbols-outlined like">thumb_down</span> -&nbsp;`;
+            await axios.patch(`/api/conversations/byid/${idconv}`,{last_message: `<span class="material-symbols-outlined like">thumb_down</span>`, last_message_time: time});
+            sendmessage('You', message, time);
+    
+        })
+    
+        sendmessagebutton.addEventListener("click",async function(event){
+            var time = new Date();
+            const message = textarea.value;
+            if(getUrlParameter('convid') == 'newconvo'){
+                var newuserdata
+                await axios.get(`/api/users/byusername/${getUrlParameter('username')}`).then(res=>{
+                    newuserdata = res.data;
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+                
+                const body = {members: [username, getUrlParameter('username')], last_message: message, last_message_time: time, name: "", group: false, profile_picture: "", nicknames: {[username]: useraccount.first_name+" "+useraccount.last_name, [newuserdata.username]: newuserdata.first_name+" "+newuserdata.last_name}}
+                var response;
+                await axios.post('/api/conversations', body).then(res=>{
+                    response = res.data;
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('convid', encodeURIComponent(res.data._id));
+                    history.pushState(null, '', newUrl);
+                });
+                console.log(response)
+                socket.emit("new_convo",{ conversation_id: response._id, members: response.members});
+                const reciever = getUrlParameter('convid');
+                socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
+    
+                axios.post('/api/messages', {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false})
+                .catch(function (error) {
+                    console.log(error);
+                });
+                const url = new URL(window.location);
+    
+                url.searchParams.delete('username');
+            
+                history.replaceState(null, '', url.toString());
+                sendmessage("You", textarea.value, time);
+                textarea.value = "";
+                rightsidebottomside[0].style.display = "flex";
+                rightsidebottomside[1].style.display = "flex";
+                rightsidebottomside[2].style.display = "none";
+                textarea.style.height = "26px";
+                return;
+            }
+            const reciever = getUrlParameter('convid');
+            socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
+            event.preventDefault();
+            const body = {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false}
+    
+            axios.post('/api/messages', body)
+            .catch(function (error) {
+                console.log(error);
+            });
+            await axios.patch(`/api/conversations/byid/${reciever}`,{last_message: message, last_message_time: time});
+            sendmessage("You", textarea.value, time);
+            const convcontainer = document.getElementById(`${reciever}`)
+            convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
+            convcontainer.querySelector(".msg").innerHTML = message+" -&nbsp;";
+            if(chatscontainer.firstChild){
+                chatscontainer.insertBefore(convcontainer, chatscontainer.firstChild);
+            }
+            textarea.value = "";
+            rightsidebottomside[0].style.display = "flex";
+            rightsidebottomside[1].style.display = "flex";
+            rightsidebottomside[2].style.display = "none";
+            textarea.style.height = "26px";
+        })
+    
+        textarea.addEventListener("keyup", function(event) {
+            if(textarea.value==""){
+                rightsidebottomside[0].style.display = "flex";
+                rightsidebottomside[1].style.display = "flex";
+                rightsidebottomside[2].style.display = "none";
+            }
+            else{
+                rightsidebottomside[0].style.display = "none";
+                rightsidebottomside[1].style.display = "none";
+                rightsidebottomside[2].style.display = "flex";
+            }
+            textarea.style.height = "26px";
+            let height = event.target.scrollHeight;
+            textarea.style.height = height + "px";
+        });
+    
+        textarea.addEventListener("keydown",async function(event) {
+            if(event.keyCode==13 && !event.shiftKey){
+                var time = new Date();
+                const message = textarea.value;
+                if(getUrlParameter('convid') == 'newconvo'){
+                    var newuserdata
+                    await axios.get(`/api/users/byusername/${getUrlParameter('username')}`).then(res=>{
+                        newuserdata = res.data;
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                    })
+                    
+                    const body = {members: [username, getUrlParameter('username')], last_message: message, last_message_time: time, name: "", group: false, profile_picture: "", nicknames: {[username]: useraccount.first_name+" "+useraccount.last_name, [newuserdata.username]: newuserdata.first_name+" "+newuserdata.last_name}}
+                    var response;
+                    await axios.post('/api/conversations', body).then(res=>{
+                        response = res.data;
+                        const newUrl = new URL(window.location);
+                        newUrl.searchParams.set('convid', encodeURIComponent(res.data._id));
+                        history.pushState(null, '', newUrl);
+                    });
+                    console.log(response)
+                    socket.emit("new_convo",{ conversation_id: response._id, members: response.members});
+                    const reciever = getUrlParameter('convid');
+                    socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
+        
+                    axios.post('/api/messages', {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false})
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                    const url = new URL(window.location);
+    
+                     url.searchParams.delete('username');
+                
+                    history.replaceState(null, '', url.toString());
+                    sendmessage("You", textarea.value, time);
+                    textarea.value = "";
+                    rightsidebottomside[0].style.display = "flex";
+                    rightsidebottomside[1].style.display = "flex";
+                    rightsidebottomside[2].style.display = "none";
+                    textarea.style.height = "26px";
+                    return;
+                }
+                const reciever = getUrlParameter('convid');
+                socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
+                event.preventDefault();
+                const body = {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false}
+    
+                axios.post('/api/messages', body)
+                .catch(function (error) {
+                    console.log(error);
+                });
+                await axios.patch(`/api/conversations/byid/${reciever}`,{last_message: message, last_message_time: time});
+                sendmessage("You", textarea.value, time);
+                const convcontainer = document.getElementById(`${reciever}`)
+                convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
+                convcontainer.querySelector(".msg").innerHTML = message+" -&nbsp;";
+                if(chatscontainer.firstChild){
+                    chatscontainer.insertBefore(convcontainer, chatscontainer.firstChild);
+                }
+                textarea.value = "";
+                rightsidebottomside[0].style.display = "flex";
+                rightsidebottomside[1].style.display = "flex";
+                rightsidebottomside[2].style.display = "none";
+                textarea.style.height = "26px";
+            }
+    
+        });
     }
 
     async function sendmessage(sendername = "You", contx, time, convdata = null){
@@ -1348,6 +1538,13 @@ const myCode = (async function(){
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
+    function showToastcreategroup(text){
+        var x = document.querySelector(".popup #toast");
+        x.innerHTML = text;
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
     const chats = document.querySelectorAll(".userscontainer .chatscontainer .userinfocontainer");
     var displayphone = false;
     const textarea = document.querySelector("textarea");
@@ -1364,203 +1561,6 @@ const myCode = (async function(){
     const sendmessagebutton = document.querySelector(".chatcontainer .conversation .bottomsection .like .send");
     const likebutton = document.querySelector(".chatcontainer .conversation .bottomsection .like span.like");
     const dislikebutton = document.querySelector(".chatcontainer .conversation .bottomsection .like span.dislike");
-
-    likebutton.addEventListener("click", async function(){
-        let idconv = getUrlParameter('convid');
-        let sender = username;
-        let message = `material-symbols-outlined.like`;
-        let time = new Date();
-        await axios.post("/api/messages",{
-            conversation_id: idconv,
-            sender: sender,
-            content: message,
-            reacts: [],
-            created_at: time,
-            edited: false,
-            deleted: false
-        })
-        socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
-        const convcontainer = document.getElementById(`${idconv}`)
-        convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
-        convcontainer.querySelector(".msg").innerHTML = `<span class="material-symbols-outlined like">thumb_up</span> -&nbsp;`;
-        await axios.patch(`/api/conversations/byid/${idconv}`,{last_message: `<span class="material-symbols-outlined like">thumb_up</span>`, last_message_time: time});
-        sendmessage('You', message, time);
-
-    })
-
-    dislikebutton.addEventListener("click", async function(){
-        let idconv = getUrlParameter('convid');
-        let sender = username;
-        let message = `material-symbols-outlined.dislike`;
-        let time = new Date();
-        await axios.post("/api/messages",{
-            conversation_id: idconv,
-            sender: sender,
-            content: message,
-            reacts: [],
-            created_at: time,
-            edited: false,
-            deleted: false
-        })
-        socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
-        const convcontainer = document.getElementById(`${idconv}`)
-        convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
-        convcontainer.querySelector(".msg").innerHTML = `<span class="material-symbols-outlined like">thumb_down</span> -&nbsp;`;
-        await axios.patch(`/api/conversations/byid/${idconv}`,{last_message: `<span class="material-symbols-outlined like">thumb_down</span>`, last_message_time: time});
-        sendmessage('You', message, time);
-
-    })
-
-    sendmessagebutton.addEventListener("click",async function(event){
-        var time = new Date();
-        const message = textarea.value;
-        if(getUrlParameter('convid') == 'newconvo'){
-            var newuserdata
-            await axios.get(`/api/users/byusername/${getUrlParameter('username')}`).then(res=>{
-                newuserdata = res.data;
-            })
-            .catch(err=>{
-                console.log(err);
-            })
-            
-            const body = {members: [username, getUrlParameter('username')], last_message: message, last_message_time: time, name: "", group: false, profile_picture: "", nicknames: {[username]: useraccount.first_name+" "+useraccount.last_name, [newuserdata.username]: newuserdata.first_name+" "+newuserdata.last_name}}
-            var response;
-            await axios.post('/api/conversations', body).then(res=>{
-                response = res.data;
-                const newUrl = new URL(window.location);
-                newUrl.searchParams.set('convid', encodeURIComponent(res.data._id));
-                history.pushState(null, '', newUrl);
-            });
-            console.log(response)
-            socket.emit("new_convo",{ conversation_id: response._id, members: response.members});
-            const reciever = getUrlParameter('convid');
-            socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
-
-            axios.post('/api/messages', {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false})
-            .catch(function (error) {
-                console.log(error);
-            });
-            const url = new URL(window.location);
-
-            url.searchParams.delete('username');
-        
-            history.replaceState(null, '', url.toString());
-            sendmessage("You", textarea.value, time);
-            textarea.value = "";
-            rightsidebottomside[0].style.display = "flex";
-            rightsidebottomside[1].style.display = "flex";
-            rightsidebottomside[2].style.display = "none";
-            textarea.style.height = "26px";
-            return;
-        }
-        const reciever = getUrlParameter('convid');
-        socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
-        event.preventDefault();
-        const body = {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false}
-
-        axios.post('/api/messages', body)
-        .catch(function (error) {
-            console.log(error);
-        });
-        await axios.patch(`/api/conversations/byid/${reciever}`,{last_message: message, last_message_time: time});
-        sendmessage("You", textarea.value, time);
-        const convcontainer = document.getElementById(`${reciever}`)
-        convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
-        convcontainer.querySelector(".msg").innerHTML = message+" -&nbsp;";
-        if(chatscontainer.firstChild){
-            chatscontainer.insertBefore(convcontainer, chatscontainer.firstChild);
-        }
-        textarea.value = "";
-        rightsidebottomside[0].style.display = "flex";
-        rightsidebottomside[1].style.display = "flex";
-        rightsidebottomside[2].style.display = "none";
-        textarea.style.height = "26px";
-    })
-
-    textarea.addEventListener("keyup", function(event) {
-        if(textarea.value==""){
-            rightsidebottomside[0].style.display = "flex";
-            rightsidebottomside[1].style.display = "flex";
-            rightsidebottomside[2].style.display = "none";
-        }
-        else{
-            rightsidebottomside[0].style.display = "none";
-            rightsidebottomside[1].style.display = "none";
-            rightsidebottomside[2].style.display = "flex";
-        }
-        textarea.style.height = "26px";
-        let height = event.target.scrollHeight;
-        textarea.style.height = height + "px";
-    });
-
-    textarea.addEventListener("keydown",async function(event) {
-        if(event.keyCode==13 && !event.shiftKey){
-            var time = new Date();
-            const message = textarea.value;
-            if(getUrlParameter('convid') == 'newconvo'){
-                var newuserdata
-                await axios.get(`/api/users/byusername/${getUrlParameter('username')}`).then(res=>{
-                    newuserdata = res.data;
-                })
-                .catch(err=>{
-                    console.log(err);
-                })
-                
-                const body = {members: [username, getUrlParameter('username')], last_message: message, last_message_time: time, name: "", group: false, profile_picture: "", nicknames: {[username]: useraccount.first_name+" "+useraccount.last_name, [newuserdata.username]: newuserdata.first_name+" "+newuserdata.last_name}}
-                var response;
-                await axios.post('/api/conversations', body).then(res=>{
-                    response = res.data;
-                    const newUrl = new URL(window.location);
-                    newUrl.searchParams.set('convid', encodeURIComponent(res.data._id));
-                    history.pushState(null, '', newUrl);
-                });
-                console.log(response)
-                socket.emit("new_convo",{ conversation_id: response._id, members: response.members});
-                const reciever = getUrlParameter('convid');
-                socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
-    
-                axios.post('/api/messages', {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false})
-                .catch(function (error) {
-                    console.log(error);
-                });
-                const url = new URL(window.location);
-
-                 url.searchParams.delete('username');
-            
-                history.replaceState(null, '', url.toString());
-                sendmessage("You", textarea.value, time);
-                textarea.value = "";
-                rightsidebottomside[0].style.display = "flex";
-                rightsidebottomside[1].style.display = "flex";
-                rightsidebottomside[2].style.display = "none";
-                textarea.style.height = "26px";
-                return;
-            }
-            const reciever = getUrlParameter('convid');
-            socket.emit('message', { username, conversation_id: getUrlParameter('convid'), message, time});
-            event.preventDefault();
-            const body = {conversation_id: reciever, sender: username , content: message, reacts: [], created_at: new Date(), edited: false, deleted: false}
-
-            axios.post('/api/messages', body)
-            .catch(function (error) {
-                console.log(error);
-            });
-            await axios.patch(`/api/conversations/byid/${reciever}`,{last_message: message, last_message_time: time});
-            sendmessage("You", textarea.value, time);
-            const convcontainer = document.getElementById(`${reciever}`)
-            convcontainer.querySelector(".time").innerHTML = timeAgo(new Date(time));
-            convcontainer.querySelector(".msg").innerHTML = message+" -&nbsp;";
-            if(chatscontainer.firstChild){
-                chatscontainer.insertBefore(convcontainer, chatscontainer.firstChild);
-            }
-            textarea.value = "";
-            rightsidebottomside[0].style.display = "flex";
-            rightsidebottomside[1].style.display = "flex";
-            rightsidebottomside[2].style.display = "none";
-            textarea.style.height = "26px";
-        }
-
-    });
 
     deployevents();
 
@@ -1807,8 +1807,13 @@ const myCode = (async function(){
 
     
 })
+function setVh() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
 
-
-
+window.addEventListener('resize', setVh);
+window.addEventListener('orientationchange', setVh);
+setVh();
 
 myCode();

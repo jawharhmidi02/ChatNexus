@@ -11,9 +11,6 @@ router.route('/byemail/:email&:password').get(getAccountByEmail).patch(updateAcc
 router.route('/byphonenumber/:phonenumber&:password').get(getAccountByPhoneNumber).patch(updateAccountByPhoneNumber).delete(deleteAccountByPhoneNumber);
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'public/photos');
-    },
     filename: (req, file, cb) => {
         const filename = Date.now() + path.extname(file.originalname);
         cb(null, filename.replace(/\\/g, '/'));

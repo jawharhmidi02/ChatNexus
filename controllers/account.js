@@ -238,6 +238,16 @@ const deleteAccountByPhoneNumber = async(req, res)=>{
     }
 }
 
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+const {
+  CLOUDINARY_CLOUD_NAME: cloud_name,
+  CLOUDINARY_API_KEY: api_key,
+  CLOUDINARY_API_SECRET: api_secret
+} = process.env;
+cloudinary.config({ cloud_name, api_key, api_secret });
+
+
 const uploadProfilePictureByUsername = async(req, res)=>{
     const {username: username, password: password} = req.params;
     try{
@@ -251,13 +261,15 @@ const uploadProfilePictureByUsername = async(req, res)=>{
         if(!isMatch){
             return res.status(404).json({msg: `No Account found with username: ${username} and password: ${password}`});
         }
-        console.log(req.body)
 
+        const file = req.file;
+        const uploadResult = await cloudinary.uploader.upload(req.file.path, {
+            public_id: file.filename
+        }).catch((error)=>{console.log(error)});
+        
 
-        const filepath = `../photos/${req.file.filename}`;
-
-        const send = await Account.findOneAndUpdate({username: username}, { profile_picture: filepath }, {new: true, runValidators: true})
-        await User.findOneAndUpdate({ username: username }, { profile_picture: filepath }, {new: true, runValidators: true});
+        const send = await Account.findOneAndUpdate({username: username}, { profile_picture: uploadResult.url }, {new: true, runValidators: true})
+        await User.findOneAndUpdate({ username: username }, { profile_picture: uploadResult.url }, {new: true, runValidators: true});
         
         return res.status(200).json(send);
     }

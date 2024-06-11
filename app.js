@@ -39,7 +39,7 @@ const convmodels = require("./models/Conversation");
 
 io.on('connection', socket => {
   socket.on('authenticate', async({username, conversations_id}) => {
-    await activeusers.findOneAndUpdate({username}, {isactive: true}, {new: true}).then(res => console.log(res));
+    await activeusers.findOneAndUpdate({username}, {isactive: true}, {new: true});
     conversations_id.forEach(el => {
       if (conversations[el]) {
         conversations[el].add(username);
@@ -53,7 +53,6 @@ io.on('connection', socket => {
 
   socket.on("new_convo", async({conversation_id, members}) => {
     conversations[conversation_id] = new Set();
-    console.log(members);
     members.forEach(async el => {
       await accounts.findOneAndUpdate({username: el}, {$push: {conversations: conversation_id}}, {new: true}).then(res => {
         if (users[el]) {
@@ -90,7 +89,7 @@ io.on('connection', socket => {
   });
 
   socket.on("leave", async({username, conversation_id}) => {
-    await accounts.findOneAndUpdate({username}, {$pull: {conversations: conversation_id}}, {new: true}).then(res => console.log(res));
+    await accounts.findOneAndUpdate({username}, {$pull: {conversations: conversation_id}}, {new: true});
     conversations[conversation_id].delete(username);
     await convmodels.findById(conversation_id).then(res => {
       if (res.members.length === 1) {
@@ -101,7 +100,7 @@ io.on('connection', socket => {
 
   socket.on("disconnect", async () => {
     const user = Object.keys(users).find(key => users[key] === socket);
-    await activeusers.findOneAndUpdate({username: user}, {isactive: false, last_time_active: new Date()}, {new: true}).then(res => console.log(res));
+    await activeusers.findOneAndUpdate({username: user}, {isactive: false, last_time_active: new Date()}, {new: true});
     if (user) {
       Object.keys(conversations).forEach(el => {
         conversations[el].delete(user);
